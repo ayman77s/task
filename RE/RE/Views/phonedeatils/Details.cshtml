@@ -1,0 +1,51 @@
+﻿@model RE.Models.phonedeatil
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>phonedeatil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.phonename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phonename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="phone">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone_price" Type="float" />
+  </EntityType>
+  <EntityType Name="phonedeatils">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="phonename" Type="nvarchar" MaxLength="50" />
+    <Property Name="ram" Type="int" />
+    <Property Name="cam" Type="float" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="phID" Type="int" />
+  </EntityType>
+  <Association Name="FK_phonedeatils_phone">
+    <End Role="phone" Type="Self.phone" Multiplicity="0..1" />
+    <End Role="phonedeatils" Type="Self.phonedeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phone">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="phonedeatils">
+        <PropertyRef Name="phID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="testModelStoreContainer">
+    <EntitySet Name="phone" EntityType="Self.phone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="phonedeatils" EntityType="Self.phonedeatils" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_phonedeatils_phone" Association="Self.FK_phonedeatils_phone">
+      <End Role="phone" EntitySet="phone" />
+      <End Role="phonedeatils" EntitySet="phonedeatils" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

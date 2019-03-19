@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="phone">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone_price" Type="Double" />
+    <NavigationProperty Name="phonedeatils" Relationship="Self.FK_phonedeatils_phone" FromRole="phone" ToRole="phonedeatils" />
+  </EntityType>
+  <EntityType Name="phonedeatil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="phonename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ram" Type="Int32" />
+    <Property Name="cam" Type="Double" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="phID" Type="Int32" />
+    <NavigationProperty Name="phone" Relationship="Self.FK_phonedeatils_phone" FromRole="phonedeatils" ToRole="phone" />
+  </EntityType>
+  <Association Name="FK_phonedeatils_phone">
+    <End Role="phone" Type="Self.phone" Multiplicity="0..1" />
+    <End Role="phonedeatils" Type="Self.phonedeatil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="phone">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="phonedeatils">
+        <PropertyRef Name="phID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="phones" EntityType="Self.phone" />
+    <EntitySet Name="phonedeatils" EntityType="Self.phonedeatil" />
+    <AssociationSet Name="FK_phonedeatils_phone" Association="Self.FK_phonedeatils_phone">
+      <End Role="phone" EntitySet="phones" />
+      <End Role="phonedeatils" EntitySet="phonedeatils" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

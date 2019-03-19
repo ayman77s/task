@@ -1,0 +1,57 @@
+﻿@model RE.Models.phonedeatil
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>phonedeatil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.phonename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phonename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

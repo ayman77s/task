@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="phone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_price" Type="float" />
+        </EntityType>
+        <EntityType Name="phonedeatils">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="phonename" Type="nvarchar" MaxLength="50" />
+          <Property Name="ram" Type="int" />
+          <Property Name="cam" Type="float" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phID" Type="int" />
+        </EntityType>
+        <Association Name="FK_phonedeatils_phone">
+          <End Role="phone" Type="Self.phone" Multiplicity="0..1" />
+          <End Role="phonedeatils" Type="Self.phonedeatils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phonedeatils">
+              <PropertyRef Name="phID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="phone" EntityType="Self.phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phonedeatils" EntityType="Self.phonedeatils" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_phonedeatils_phone" Association="Self.FK_phonedeatils_phone">
+            <End Role="phone" EntitySet="phone" />
+            <End Role="phonedeatils" EntitySet="phonedeatils" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="phone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_price" Type="Double" />
+          <NavigationProperty Name="phonedeatils" Relationship="Self.FK_phonedeatils_phone" FromRole="phone" ToRole="phonedeatils" />
+        </EntityType>
+        <EntityType Name="phonedeatil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="phonename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ram" Type="Int32" />
+          <Property Name="cam" Type="Double" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phID" Type="Int32" />
+          <NavigationProperty Name="phone" Relationship="Self.FK_phonedeatils_phone" FromRole="phonedeatils" ToRole="phone" />
+        </EntityType>
+        <Association Name="FK_phonedeatils_phone">
+          <End Role="phone" Type="Self.phone" Multiplicity="0..1" />
+          <End Role="phonedeatils" Type="Self.phonedeatil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="phonedeatils">
+              <PropertyRef Name="phID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="phones" EntityType="Self.phone" />
+          <EntitySet Name="phonedeatils" EntityType="Self.phonedeatil" />
+          <AssociationSet Name="FK_phonedeatils_phone" Association="Self.FK_phonedeatils_phone">
+            <End Role="phone" EntitySet="phones" />
+            <End Role="phonedeatils" EntitySet="phonedeatils" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="phones">
+            <EntityTypeMapping TypeName="testModel.phone">
+              <MappingFragment StoreEntitySet="phone">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone_price" ColumnName="phone_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phonedeatils">
+            <EntityTypeMapping TypeName="testModel.phonedeatil">
+              <MappingFragment StoreEntitySet="phonedeatils">
+                <ScalarProperty Name="phonename" ColumnName="phonename" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="cam" ColumnName="cam" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="phID" ColumnName="phID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

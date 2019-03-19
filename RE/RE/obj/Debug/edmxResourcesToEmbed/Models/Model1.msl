@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+    <EntitySetMapping Name="phones">
+      <EntityTypeMapping TypeName="testModel.phone">
+        <MappingFragment StoreEntitySet="phone">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone_price" ColumnName="phone_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="phonedeatils">
+      <EntityTypeMapping TypeName="testModel.phonedeatil">
+        <MappingFragment StoreEntitySet="phonedeatils">
+          <ScalarProperty Name="phonename" ColumnName="phonename" />
+          <ScalarProperty Name="ram" ColumnName="ram" />
+          <ScalarProperty Name="cam" ColumnName="cam" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="phID" ColumnName="phID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
